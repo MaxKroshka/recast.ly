@@ -2,10 +2,10 @@ class App extends React.Component {
 
   constructor(props) {
     super(props)
-
+ 
     this.state = {
       videos: this.props.videos,
-      currentVideo: this.props.videos[0]
+      currentVideo: this.props.videos[0],
     }
 
     this.handleUserInput = this.handleUserInput.bind(this);
