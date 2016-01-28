@@ -7,24 +7,23 @@ class App extends React.Component {
       videos: this.props.videos,
       currentVideo: this.props.videos[0]
     }
+
+    this.handleUserInput = this.handleUserInput.bind(this);
   }
 
-
- handleClick (event) {
-  this.setState({
-    currentVideo : event.target
-  })
-}
+  handleUserInput(currentVideo) {
+    this.setState({currentVideo: currentVideo})
+  } 
 
   render () {
     return  (
       <div>
         <Nav />
         <div className="col-md-7">
-          <VideoPlayer video={this.props.videos[0]} selectedVideoId={this.state.selectedVideoId}/>
+          <VideoPlayer currentVideo={this.state.currentVideo} videos={this.state.videos}/>
         </div>
         <div className="col-md-5">
-          <VideoList state={this.state} handleClick={this.handleClick}/>
+          <VideoList currentVideo={this.state.currrentVideo} videos={this.state.videos} handleUserInput={this.handleUserInput}/>
         </div>
       </div>
     );

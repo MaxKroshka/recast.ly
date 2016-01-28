@@ -7,8 +7,8 @@ class VideoList extends React.Component {
   render() {
 		return (
 			<div className="video-list media">
-				{exampleVideoData.map((video,index) =>
-						<VideoListEntry videoIndex={index} video={video} handleClick={this.props.handleClick} state={this.props.state}/>
+				{this.props.videos.map((video) =>
+						<VideoListEntry video={video} currentVideo={this.props.currentVideo} handleUserInput={this.props.handleUserInput} />
 				)}
 			</div>
 		);
