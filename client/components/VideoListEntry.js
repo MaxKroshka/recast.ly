@@ -4,8 +4,10 @@ class VideoListEntry extends React.Component {
  }
 
  render () { 
+    // var idThatWeWantToReturn = this.props.video.id.videoId;
+
   return (
-    <div className="video-list-entry">
+    <div className="video-list-entry" onClick={this.props.handleClick}>
       <div className="media-left media-middle">
         <img className="media-object" src={this.props.video.snippet.thumbnails.default.url} alt="" />
       </div>
