@@ -1,5 +1,5 @@
-var VideoListEntry = ({video,handleUserInput}) => (
-  <div className="video-list-entry" onClick={() => handleUserInput(video)}>
+var VideoListEntry = ({video,handleVideoListEntryClick}) => (
+  <div className="video-list-entry" onClick={() => handleVideoListEntryClick(video)}>
     <div className="media-left media-middle">
       <img className="media-object" src={video.snippet.thumbnails.default.url} alt="" />
     </div>

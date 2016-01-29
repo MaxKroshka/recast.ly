@@ -1,18 +1,9 @@
-class VideoList extends React.Component {
-
-  constructor(props){
-    super(props);
-  }
-
-  render() {
-		return (
-			<div className="video-list media">
-				{this.props.videos.map((video) =>
-						<VideoListEntry video={video} currentVideo={this.props.currentVideo} handleUserInput={this.props.handleUserInput} />
-				)}
-			</div>
-		);
-  }
-}
+var VideoList = ({handleVideoListEntryClick,videos}) => (
+	<div className="video-list media">
+		{videos.map((video,i) =>
+			<VideoListEntry video={video} handleVideoListEntryClick={handleVideoListEntryClick} key={i}/>
+		)}
+	</div>
+);
 
 window.VideoList = VideoList;

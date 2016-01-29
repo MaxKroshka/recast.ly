@@ -5,30 +5,22 @@ class App extends React.Component {
  
     this.state = {
       videos: [],
-      currentVideo: null,
-      searchText: ''
+      currentVideo: null
     }
-
-    this.set = this.set.bind(this)
-    this.handleUserInput = this.handleUserInput.bind(this);
-    this.handleSearchInput = this.handleSearchInput.bind(this);
-  }
-
-  set(data) {
-    this.setState({videos: data.items})
   }
 
   handleSearchInput(searchedText){
-    this.setState({searchText: searchedText});
-    window.searchYouTube(searchedText, this.set);
+    searchYouTube(searchedText, (data) => {
+      this.setState({videos: data.items})
+    });
   }
 
-  handleUserInput(currentVideo) {
+  handleVideoListEntryClick(currentVideo) {
     this.setState({currentVideo: currentVideo})
   } 
 
   componentDidMount() {
-    window.searchYouTube('', (data) => {
+    searchYouTube('', (data) => {
       this.setState({videos: data.items, currentVideo: data.items[0]})
     });
   }
@@ -36,16 +28,16 @@ class App extends React.Component {
   render () {
     return  (
       <div>
-        <Nav handleSearchInput={this.handleSearchInput} searchedText={this.state.searchText}/>
+        <Nav handleSearchInput={this.handleSearchInput.bind(this)}/>
         <div className="col-md-7">
           <VideoPlayer currentVideo={this.state.currentVideo} videos={this.state.videos}/>
         </div>
         <div className="col-md-5">
-          <VideoList currentVideo={this.state.currrentVideo} videos={this.state.videos} handleUserInput={this.handleUserInput}/>
+          <VideoList videos={this.state.videos} handleVideoListEntryClick={this.handleVideoListEntryClick.bind(this)}/>
         </div>
       </div>
     );
   }
 }
 
-ReactDOM.render(<App videos={window.exampleVideoData} />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'));
