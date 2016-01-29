@@ -5,7 +5,10 @@ class App extends React.Component {
  
     this.state = {
       videos: [],
-      currentVideo: null
+      currentVideo: null,
+      currentVideoViewCount: 0,
+      currentVideoLikeCount: 0,
+      currentVideoDislikeCount: 0
     }
   }
 
@@ -17,11 +20,25 @@ class App extends React.Component {
 
   handleVideoListEntryClick(currentVideo) {
     this.setState({currentVideo: currentVideo})
+    searchYouTubeForStats(currentVideo.id.videoId, (stats) => {
+      this.setState({
+        currentVideoDislikeCount: stats.items[0].statistics.dislikeCount,
+        currentVideoViewCount: stats.items[0].statistics.viewCount,
+        currentVideoLikeCount: stats.items[0].statistics.likeCount
+      })
+    })
   } 
 
   componentDidMount() {
     searchYouTube('', (data) => {
       this.setState({videos: data.items, currentVideo: data.items[0]})
+      searchYouTubeForStats(data.items[0].id.videoId, (stats) => {
+        this.setState({
+          currentVideoDislikeCount: stats.items[0].statistics.dislikeCount,
+          currentVideoViewCount: stats.items[0].statistics.viewCount,
+          currentVideoLikeCount: stats.items[0].statistics.likeCount
+        })
+      })
     });
   }
 
@@ -30,7 +47,7 @@ class App extends React.Component {
       <div>
         <Nav handleSearchInput={this.handleSearchInput.bind(this)}/>
         <div className="col-md-7">
-          <VideoPlayer currentVideo={this.state.currentVideo} videos={this.state.videos}/>
+          <VideoPlayer state={this.state}/>
         </div>
         <div className="col-md-5">
           <VideoList videos={this.state.videos} handleVideoListEntryClick={this.handleVideoListEntryClick.bind(this)}/>
