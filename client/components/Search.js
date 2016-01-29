@@ -12,7 +12,7 @@ handleSearch () {
   render() {
     return (
       <div className="search-bar form-inline">
-        <input className="form-control" type="text" ref="searchTextInput" onChange={this.handleSearch}/>
+        <input className="form-control" type="text" ref="searchTextInput" onChange={_.debounce(this.handleSearch,700)}/>
         <button className="btn hidden-sm-down">
           <span className="glyphicon glyphicon-search"></span>
         </button>
