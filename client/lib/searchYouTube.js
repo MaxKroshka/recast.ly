@@ -7,7 +7,6 @@ var searchYouTube = (keyword,callback) => {
     type: 'video',
     videoEmbeddable: 'true'
   }).done(data => {
-      console.log(data.items);
       callback(data);
     })
   .fail(data => {
@@ -24,8 +23,7 @@ var searchYouTubeForStats = (videoId,callback) => {
     key: window.YOUTUBE_API_KEY,
     id: videoId
   }).done(data => {
-      console.log(data);
-      callback(data);
+      callback(data.items[0]);
     })
   .fail(data => {
       console.error('Youtube: Failed to send message');

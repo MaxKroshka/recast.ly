@@ -22,9 +22,9 @@ class App extends React.Component {
     this.setState({currentVideo: currentVideo})
     searchYouTubeForStats(currentVideo.id.videoId, (stats) => {
       this.setState({
-        currentVideoDislikeCount: stats.items[0].statistics.dislikeCount,
-        currentVideoViewCount: stats.items[0].statistics.viewCount,
-        currentVideoLikeCount: stats.items[0].statistics.likeCount
+        currentVideoDislikeCount: stats.statistics.dislikeCount,
+        currentVideoViewCount: stats.statistics.viewCount,
+        currentVideoLikeCount: stats.statistics.likeCount
       })
     })
   } 
@@ -34,9 +34,9 @@ class App extends React.Component {
       this.setState({videos: data.items, currentVideo: data.items[0]})
       searchYouTubeForStats(data.items[0].id.videoId, (stats) => {
         this.setState({
-          currentVideoDislikeCount: stats.items[0].statistics.dislikeCount,
-          currentVideoViewCount: stats.items[0].statistics.viewCount,
-          currentVideoLikeCount: stats.items[0].statistics.likeCount
+          currentVideoDislikeCount: stats.statistics.dislikeCount,
+          currentVideoViewCount: stats.statistics.viewCount,
+          currentVideoLikeCount: stats.statistics.likeCount
         })
       })
     });

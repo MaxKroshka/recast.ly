@@ -6,7 +6,13 @@ var VideoPlayer = ({state}) => (
       </div>
       <div className="video-player-details">
         <h3>{state.currentVideo.snippet.title}</h3>
-        <DetailsBar state={state}/>
+        <div>
+          <div className="col-md-3">
+          </div>
+          <div className="col-md-9">
+          <DetailsBar state={state}/>
+          </div>
+        </div>
         <div>{state.currentVideo.snippet.description}</div>
       </div>
     </div>
